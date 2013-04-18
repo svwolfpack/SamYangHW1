@@ -12,11 +12,24 @@
 @end
 
 @implementation Deck
-- (NSMutableArray *)cards
+//init functions go at top
+- (id)init  //over ride default init function
 {
-    if (!_cards) _cards = [[NSMutableArray alloc] init];
-    return _cards;
+    self = [super init];    //calling init on NSObject; done by default but we have
+                            //to do it
+    if (self)
+    {
+        self.cards = [[NSMutableArray alloc] init];
+    }
+    return self;
 }
+
+//- (NSMutableArray *)cards
+//{
+//    if (!_cards) _cards = [[NSMutableArray alloc] init];
+//    return _cards;
+//}
+
 - (void)addCard:(Card *)card atTop:(BOOL)atTop
 {
     if (atTop) {

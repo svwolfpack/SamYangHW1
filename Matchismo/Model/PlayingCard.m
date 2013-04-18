@@ -10,6 +10,9 @@
 
 @implementation PlayingCard
 
+@synthesize suit = _suit;
+@synthesize rank = _rank;
+
 - (NSString *)contents
 {
     // return [NSString stringWithFormat:@"%d%@", self.rank, self.suit];
@@ -18,7 +21,6 @@
     return [rankStrings[self.rank] stringByAppendingString:self.suit];
 }
 
-@synthesize suit = _suit;
 + (NSArray *)validSuits {
     return @[@"♥",@"♦",@"♠",@"♣"];
 }
