@@ -10,6 +10,10 @@
 @interface Card()
 @end
 @implementation Card
+@synthesize contents;
+@synthesize faceUp;
+@synthesize unplayable;
+
 - (int)match:(NSArray *)otherCards
 {
     int score = 0;

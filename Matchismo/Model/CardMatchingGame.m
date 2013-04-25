@@ -13,10 +13,40 @@
 @end
 
 @implementation CardMatchingGame
-- (NSMutableArray *)cards
+@synthesize cards;
+- (id)cards
 {
-    if (!_cards) _cards = [[NSMutableArray alloc] init];
-    return _cards;
+    if(!cards)
+        cards = [[NSMutableArray alloc] init];
+    return cards;
+}
+//- (NSMutableArray *)cards
+//{
+//    if (!_cards) _cards = [[NSMutableArray alloc] init];
+//    return _cards;
+//}
+
+- (id)initWithCardCount:(NSUInteger)count
+              usingDeck:(Deck *)deck;
+{
+    self = [super init];
+    
+    if (self) {
+        for (int i=0; i < count; i++) {
+            Card *card = [deck drawRandomCard];
+            
+            //if able to draw random card, put it in
+            //if asking for more than 52 cards, we'd have a malformed array so
+            if (!card) {
+                self = nil;
+            } else {
+                self.cards[i] = card;
+            }
+            
+            self.cards[i] = card; //if this is nil, nothing will happen, so we need lazy instantiation
+        }
+    }
+    return self;
 }
 
 - (Card *)cardAtIndex:(NSUInteger)index
@@ -59,27 +89,5 @@
     }
 }
 
-- (id)initWithCardCount:(NSUInteger)count
-              usingDeck:(Deck *)deck;
-{
-    self = [super init];
-    
-    if (self) {
-        for (int i=0; i < count; i++) {
-            Card *card = [deck drawRandomCard];
-            
-            //if able to draw random card, put it in
-            //if asking for more than 52 cards, we'd have a malformed array so 
-            if (card) {
-                self.cards[i] = card;
-            } else {
-                self = nil;
-                break;
-            }
-            
-            self.cards[i] = card; //if this is nil, nothing will happen, so we need lazy instantiation
-        }
-    }
-    return self;
-}
+
 @end
