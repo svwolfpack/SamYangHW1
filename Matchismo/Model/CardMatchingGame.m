@@ -68,23 +68,34 @@
         //look at other cards in cards
         
         if(!card.isFaceUp) {
+            NSMutableArray *faceUpCards = [[NSMutableArray alloc] init];
             for (Card *otherCard in self.cards) {
-                if(otherCard.isFaceUp && !otherCard.isUnplayable) {
-                    int matchScore = [card match:@[otherCard]];
-                    if (matchScore) {
-                        //if matches, turn both cards face down and aware points
-                        card.unplayable = YES;
-                        otherCard.unplayable = YES;
-                        self.score += matchScore * MATCH_BONUS;
-                    } else {
-                        otherCard.faceUp = NO;
-                        self.score -= MISMATCH_PENALTY;
-                    }
-                    break;
+                if(otherCard.isFaceUp && !otherCard.isUnplayable)
+                {
+                    [faceUpCards addObject:otherCard];
                 }
             }
+            
+            int matchScore = [card match:[faceUpCards copy]];   //we have a NSMutable but we need a NSArray
+            if (matchScore > 0) {
+                card.unplayable = YES;
+                for(Card *card in faceUpCards)
+                {
+                    card.unplayable = YES;
+                }
+                self.score += matchScore * MATCH_BONUS;
+            }
+            else {
+                for(Card *card in faceUpCards)
+                {
+                    card.faceUp = NO;
+                }
+                self.score -= MISMATCH_PENALTY;
+            }
+            
             self.score -= FLIP_COST;
         }
+        
         card.faceUp = !card.isFaceUp;
     }
 }

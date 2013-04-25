@@ -16,15 +16,11 @@
 - (int)match:(NSArray *)otherCards
 {   int score = 0;
     
-    if ([otherCards count] == 1) {
-        
-        //here only matching against one other card
-        PlayingCard *otherCard = [otherCards lastObject];
-        //lastObject never gives you out of bounds, will give you nil
-        if ([otherCard.suit isEqualToString:self.suit]) {
-            score = 1;
-        } else if (otherCard.rank == self.rank) {
-            score = 4;
+    for(PlayingCard *card in otherCards) {
+        if ([card.suit isEqualToString:self.suit] || card.rank == self.rank) {
+            score++;
+        } else {
+            score--;
         }
     }
     return score;
