@@ -76,26 +76,28 @@
                 }
             }
             
-            int matchScore = [card match:[faceUpCards copy]];   //we have a NSMutable but we need a NSArray
-            if (matchScore > 0) {
-                card.unplayable = YES;
-                for(Card *card in faceUpCards)
-                {
+            if(faceUpCards.count == 2)  //2 for 3-card game
+            {
+                int matchScore = [card match:[faceUpCards copy]];   //we have a NSMutable but we need a NSArray
+                if (matchScore > 0) {
                     card.unplayable = YES;
+                    for(Card *card in faceUpCards)
+                    {
+                        card.unplayable = YES;
+                    }
+                    self.score += matchScore * MATCH_BONUS;
                 }
-                self.score += matchScore * MATCH_BONUS;
-            }
-            else {
-                for(Card *card in faceUpCards)
-                {
-                    card.faceUp = NO;
+                else {
+                    for(Card *card in faceUpCards)
+                    {
+                        card.faceUp = NO;
+                    }
+                    self.score -= MISMATCH_PENALTY;
                 }
-                self.score -= MISMATCH_PENALTY;
-            }
             
-            self.score -= FLIP_COST;
-        }
-        
+                self.score -= FLIP_COST;
+                }
+            }
         card.faceUp = !card.isFaceUp;
     }
 }
