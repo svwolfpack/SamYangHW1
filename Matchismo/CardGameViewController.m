@@ -15,6 +15,7 @@
 @property (nonatomic) int flipCount;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 //@property (strong, nonatomic) Deck *deck; //unnecessary to use Deck anymore b/c we're going to use the model
+@property (weak, nonatomic) IBOutlet UIButton *dealButton;
 @property (strong, nonatomic) CardMatchingGame * game; //create property that points to model
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @end
@@ -36,9 +37,15 @@
 //    }
 //}
 
+- (void)setDealButton:(UIButton *)dealButton
+{
+    _dealButton = dealButton;
+    //call method to deal new game
+    //[self updateUI];
+}
+
 - (void)setCardButtons:(NSArray *)cardButtons
 {
-    NSLog(@"Setting card buttons");
     _cardButtons = cardButtons;
     //for (UIButton *cardButton in self.cardButtons)
     //{
