@@ -10,6 +10,7 @@
 @interface CardMatchingGame()
 @property(readwrite, nonatomic)int score;
 @property(strong, nonatomic) NSMutableArray *cards; // of Card
+@property (readwrite, nonatomic, strong)NSString *resultOfLastFlip;
 @end
 
 @implementation CardMatchingGame
@@ -60,7 +61,7 @@
 
 - (void)flipCardAtIndex:(NSUInteger)index
 {
-    Card *card = [self cardAtIndex:index];
+    PlayingCard *card = [self cardAtIndex:index];
     
     //make sure we get card at that index and it's playable
     if (card && !card.isUnplayable) {
@@ -69,35 +70,44 @@
         
         if(!card.isFaceUp) {
             NSMutableArray *faceUpCards = [[NSMutableArray alloc] init];
-            for (Card *otherCard in self.cards) {
+            for (PlayingCard *otherCard in self.cards) {
                 if(otherCard.isFaceUp && !otherCard.isUnplayable)
                 {
                     [faceUpCards addObject:otherCard];
                 }
             }
             
-            if(faceUpCards.count == 2)  //2 for 3-card game
+            
+            if(faceUpCards.count == 1)  //2 for 3-card game
             {
                 int matchScore = [card match:[faceUpCards copy]];   //we have a NSMutable but we need a NSArray
                 if (matchScore > 0) {
                     card.unplayable = YES;
-                    for(Card *card in faceUpCards)
+                    for(PlayingCard *faceUpCard in faceUpCards)
                     {
-                        card.unplayable = YES;
+                        faceUpCard.unplayable = YES;
+                        
+                        self.resultOfLastFlip = [NSString stringWithFormat:@"Matched %@%d with %@%d for %d points", card.suit, card.rank, faceUpCard.suit, faceUpCard.rank, matchScore * MATCH_BONUS];
                     }
                     self.score += matchScore * MATCH_BONUS;
                 }
                 else {
-                    for(Card *card in faceUpCards)
+                    for(PlayingCard *faceUpCard in faceUpCards)
                     {
-                        card.faceUp = NO;
+                        faceUpCard.faceUp = NO;
+                        self.resultOfLastFlip = [NSString stringWithFormat:@"%@%d and %@%d don't match! %d point penalty!", card.suit, card.rank, faceUpCard.suit, faceUpCard.rank, MISMATCH_PENALTY];
                     }
                     self.score -= MISMATCH_PENALTY;
+                    
+                    
                 }
-            
+                
                 self.score -= FLIP_COST;
-                }
             }
+            else {
+                self.resultOfLastFlip = [NSString stringWithFormat:@"Flipped up %@%d!", card.suit, card.rank];
+            }
+        }
         card.faceUp = !card.isFaceUp;
     }
 }

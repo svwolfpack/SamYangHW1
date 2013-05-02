@@ -18,15 +18,27 @@
 @property (weak, nonatomic) IBOutlet UIButton *dealButton;
 @property (strong, nonatomic) CardMatchingGame * game; //create property that points to model
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *resultsOfLastFlipLabel;
 @end
 
 @implementation CardGameViewController
+@synthesize game = _game;   //not automatic if you have your own setter
 - (CardMatchingGame *)game
 {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                                          usingDeck:[[PlayingCardDeck alloc] init]];
     
     return _game;
+}
+
+-(void)setGame:(CardMatchingGame *)game
+{
+    _game = game;
+}
+
+- (IBAction)dealPressed:(UIButton *)sender {
+    [self setGame:nil];
+    [self updateUI];
 }
 
 //- (Deck *)deck
@@ -36,13 +48,6 @@
 //        return _deck;
 //    }
 //}
-
-- (void)setDealButton:(UIButton *)dealButton
-{
-    _dealButton = dealButton;
-    //call method to deal new game
-    //[self updateUI];
-}
 
 - (void)setCardButtons:(NSArray *)cardButtons
 {
@@ -85,6 +90,7 @@
     //tell our model please flip card at index n
     
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
+    self.resultsOfLastFlipLabel.text = self.game.resultOfLastFlip;
     self.flipCount++;
     [self updateUI];
     
