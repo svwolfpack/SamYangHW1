@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F7DE2426175E2AA500E920B1 /* house.png in Resources */ = {isa = PBXBuildFile; fileRef = F7DE2425175E2AA500E920B1 /* house.png */; };
+		F7DE2428175E2AFE00E920B1 /* newspaper.png in Resources */ = {isa = PBXBuildFile; fileRef = F7DE2427175E2AFE00E920B1 /* newspaper.png */; };
+		F7DE242B175E2D3600E920B1 /* GameResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DE242A175E2D3600E920B1 /* GameResultViewController.m */; };
+		F7DE242E175E31E300E920B1 /* GameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DE242D175E31E300E920B1 /* GameResult.m */; };
 		F7E39D39171DC04300F89799 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E39D38171DC04300F89799 /* UIKit.framework */; };
 		F7E39D3B171DC04300F89799 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E39D3A171DC04300F89799 /* Foundation.framework */; };
 		F7E39D3D171DC04300F89799 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E39D3C171DC04300F89799 /* CoreGraphics.framework */; };
@@ -26,6 +30,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F7DE2425175E2AA500E920B1 /* house.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = house.png; path = "../../../Downloads/app-bits_free_tabbar_icons/standard/house.png"; sourceTree = "<group>"; };
+		F7DE2427175E2AFE00E920B1 /* newspaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = newspaper.png; path = "../../../Downloads/app-bits_free_tabbar_icons/standard/newspaper.png"; sourceTree = "<group>"; };
+		F7DE2429175E2D3600E920B1 /* GameResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameResultViewController.h; sourceTree = "<group>"; };
+		F7DE242A175E2D3600E920B1 /* GameResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameResultViewController.m; sourceTree = "<group>"; };
+		F7DE242C175E31E300E920B1 /* GameResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameResult.h; path = Model/GameResult.h; sourceTree = "<group>"; };
+		F7DE242D175E31E300E920B1 /* GameResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameResult.m; path = Model/GameResult.m; sourceTree = "<group>"; };
 		F7E39D35171DC04300F89799 /* Matchismo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Matchismo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7E39D38171DC04300F89799 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F7E39D3A171DC04300F89799 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -100,6 +110,10 @@
 			children = (
 				F7E39D67171DD92E00F89799 /* Model */,
 				F7E39D50171DC04300F89799 /* MainStoryboard.storyboard */,
+				F7DE242C175E31E300E920B1 /* GameResult.h */,
+				F7DE242D175E31E300E920B1 /* GameResult.m */,
+				F7DE2429175E2D3600E920B1 /* GameResultViewController.h */,
+				F7DE242A175E2D3600E920B1 /* GameResultViewController.m */,
 				F7E39D53171DC04300F89799 /* CardGameViewController.h */,
 				F7E39D54171DC04400F89799 /* CardGameViewController.m */,
 				F7E39D3F171DC04300F89799 /* Supporting Files */,
@@ -110,6 +124,8 @@
 		F7E39D3F171DC04300F89799 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F7DE2427175E2AFE00E920B1 /* newspaper.png */,
+				F7DE2425175E2AA500E920B1 /* house.png */,
 				F7E39D47171DC04300F89799 /* CardGameAppDelegate.h */,
 				F7E39D48171DC04300F89799 /* CardGameAppDelegate.m */,
 				F7E39D40171DC04300F89799 /* Matchismo-Info.plist */,
@@ -197,6 +213,8 @@
 				F7E39D4D171DC04300F89799 /* Default@2x.png in Resources */,
 				F7E39D4F171DC04300F89799 /* Default-568h@2x.png in Resources */,
 				F7E39D52171DC04300F89799 /* MainStoryboard.storyboard in Resources */,
+				F7DE2426175E2AA500E920B1 /* house.png in Resources */,
+				F7DE2428175E2AFE00E920B1 /* newspaper.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +233,8 @@
 				F7E39D63171DD91100F89799 /* PlayingCard.m in Sources */,
 				F7E39D66171DD92500F89799 /* PlayingCardDeck.m in Sources */,
 				F7FBE56C1725EE7000C2883B /* CardMatchingGame.m in Sources */,
+				F7DE242B175E2D3600E920B1 /* GameResultViewController.m in Sources */,
+				F7DE242E175E31E300E920B1 /* GameResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

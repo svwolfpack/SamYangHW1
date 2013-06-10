@@ -9,6 +9,7 @@
 #import "CardGameViewController.h"
 #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
+#import "GameResult.h"
 
 @interface CardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
@@ -19,46 +20,34 @@
 @property (strong, nonatomic) CardMatchingGame * game; //create property that points to model
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultsOfLastFlipLabel;
+@property (strong, nonatomic) GameResult *gameResult;
 @end
 
 @implementation CardGameViewController
 @synthesize game = _game;   //not automatic if you have your own setter
-- (CardMatchingGame *)game
+@synthesize gameResult = _gameResult;
+
+- (void)viewDidLoad
+//in view controllers, treat this like init for other things
 {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                                         usingDeck:[[PlayingCardDeck alloc] init]];
+    [super viewDidLoad];
     
-    return _game;
+    self.gameResult = [[GameResult alloc]init];
+    self.game = [[CardMatchingGame alloc]initWithCardCount:self.cardButtons.count usingDeck:[[PlayingCardDeck alloc]init]];
+    
 }
 
--(void)setGame:(CardMatchingGame *)game
+- (void)viewWillAppear:(BOOL)animated
 {
-    _game = game;
+    [super viewWillAppear:animated];
+    [self updateUI];
 }
 
 - (IBAction)dealPressed:(UIButton *)sender {
     [self setGame:nil];
+    self.gameResult = nil;
+    self.flipCount = 0;
     [self updateUI];
-}
-
-//- (Deck *)deck
-//{
-//  if (!_deck) _deck = [[PlayingCardDeck alloc] init];
-//    {
-//        return _deck;
-//    }
-//}
-
-- (void)setCardButtons:(NSArray *)cardButtons
-{
-    _cardButtons = cardButtons;
-    //for (UIButton *cardButton in self.cardButtons)
-    //{
-    //    Card *card = [self.deck drawRandomCard];
-    //    [cardButton setTitle:card.contents forState:UIControlStateSelected];
-    //}
-    //i need to update UI to reflect the model here
-    [self updateUI]; // common paradigm to have method that makes sure model and control are aligned
 }
 
 - (void)updateUI
@@ -78,6 +67,7 @@
 {
     _flipCount = flipCount;
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
+    self.gameResult.score = self.game.score;
 }
 
 - (IBAction)flipCard:(UIButton *)sender

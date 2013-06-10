@@ -98,10 +98,7 @@
                         self.resultOfLastFlip = [NSString stringWithFormat:@"%@%d and %@%d don't match! %d point penalty!", card.suit, card.rank, faceUpCard.suit, faceUpCard.rank, MISMATCH_PENALTY];
                     }
                     self.score -= MISMATCH_PENALTY;
-                    
-                    
                 }
-                
                 self.score -= FLIP_COST;
             }
             else {

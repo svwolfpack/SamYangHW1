@@ -19,7 +19,7 @@
 
 - (void)flipCardAtIndex:(NSUInteger)index;
 
-- (Card *)cardAtIndex:(NSUInteger)index;
+- (PlayingCard *)cardAtIndex:(NSUInteger)index;
 
 @property (readonly, nonatomic)int score;
 @property (readonly, nonatomic, strong)NSString *resultOfLastFlip;
